@@ -2,9 +2,15 @@ pipeline {
     agent any
     
     stages {
+        
         stage("Build & making tar file") {
             steps {
                 sh "tar -cvf pythontar.${img_tag}.tar demo-backend2"
+            }
+        }
+        stage('pushing to nexus repo') {
+            steps {
+                sh 'curl -v -u jashu:12345 --upload-file pythontar.${img_tag}.tar "http://${ip_address}:8081/repository/python-repo/pythontar.${img_tag}.tar"'
             }
         }
     }
