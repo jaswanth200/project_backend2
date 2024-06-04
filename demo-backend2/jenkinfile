@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage("Build & making tar file") {
+            steps {
+                sh "tar -cvf pythontar.${img_tag}.tar demo-backend2"
+            }
+        }
+    }
+}
